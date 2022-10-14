@@ -24,4 +24,3 @@ module.exports = {
     'spaced-comment': ['error', 'always'],
   },
 }
-test
