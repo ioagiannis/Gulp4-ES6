@@ -223,3 +223,5 @@ export const build = series(
     mockServer
   )
 )
+
+export default dev
