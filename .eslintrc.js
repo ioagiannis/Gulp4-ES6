@@ -20,7 +20,16 @@ module.exports = {
     jquery: true,
   },
   rules: {
-    // override/add rules settings here, such as:
+    // override/add rules settings here, such as:\
+    eqeqeq: 1,
+    'no-empty-function': 1,
+    'vars-on-top': 1,
+    'no-inline-comments': 1,
+    'default-case': 1,
+    'default-param-last': 1,
+    'no-duplicate-imports': 1,
+    'no-self-compare': 1,
+    'no-template-curly-in-string': 1,
     'prefer-template': 1,
     'prefer-const': 1,
     'no-var': 1,
@@ -29,7 +38,7 @@ module.exports = {
     'vue/no-v-html': 'off',
     'vue/multi-word-component-names': 'off',
     'sort-imports': [
-      'error',
+      'warn',
       {
         ignoreCase: false,
         ignoreDeclarationSort: true,
@@ -38,6 +47,6 @@ module.exports = {
         allowSeparatedGroups: false,
       },
     ],
-    'spaced-comment': ['error', 'always'],
+    'spaced-comment': ['warn', 'always'],
   },
 }
