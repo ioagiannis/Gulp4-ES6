@@ -1,4 +1,9 @@
 module.exports = {
+  env: {
+    browser: true,
+    es6: true,
+    jquery: true,
+  },
   extends: [
     // add more generic rulesets here, such as:
     'eslint:recommended',
@@ -14,11 +19,6 @@ module.exports = {
     'src/js/vendors/*',
     'src/mockServer/*',
   ],
-  env: {
-    browser: true,
-    es6: true,
-    jquery: true,
-  },
   rules: {
     // override/add rules settings here, such as:\
     // Severity should be one of the following: 0 = off, 1 = warn, 2 = error
@@ -51,8 +51,6 @@ module.exports = {
     'no-var': 1,
     'no-unused-vars': 1,
     camelcase: 1,
-    'vue/no-v-html': 0,
-    'vue/multi-word-component-names': 0,
     'sort-imports': [
       1,
       {
@@ -64,5 +62,21 @@ module.exports = {
       },
     ],
     'spaced-comment': [1, 'always'],
+    'vue/no-v-html': 0,
+    'vue/multi-word-component-names': 0,
+    'vue/no-restricted-syntax': 1,
+    'vue/html-button-has-type': 1,
+    'vue/no-empty-component-block': 1,
+    'vue/no-multiple-objects-in-class': 1,
+    'vue/no-potential-component-option-typo': 1,
+    'vue/no-restricted-class': 1,
+    'vue/no-restricted-component-options': 1,
+    'vue/no-restricted-custom-event': 1,
+    'vue/no-restricted-html-elements': 1,
+    'vue/no-restricted-props': 1,
+    'vue/no-restricted-static-attribute': 1,
+    'vue/no-template-target-blank': 1,
+    'vue/no-v-text': 1,
+    'vue/v-on-function-call': 1,
   },
 }
