@@ -1,4 +1,6 @@
 const { VueLoaderPlugin } = require('vue-loader')
+const ESLintPlugin = require('eslint-webpack-plugin')
+const path = require('path')
 
 module.exports = {
   devtool: 'source-map',
@@ -36,7 +38,14 @@ module.exports = {
       },
     ],
   },
-  plugins: [new VueLoaderPlugin()],
+  plugins: [
+    new VueLoaderPlugin(),
+    new ESLintPlugin({
+      failOnError: true,
+      extensions: ['vue'],
+      overrideConfigFile: path.resolve(__dirname, '.eslintrc.js'),
+    }),
+  ],
   resolve: {
     alias: {
       // vue: 'vue/dist/vue.esm-bundler.js',

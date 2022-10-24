@@ -1,3 +1,6 @@
+const ESLintPlugin = require('eslint-webpack-plugin')
+const path = require('path')
+
 module.exports = {
   output: {
     filename: 'main.js',
@@ -13,5 +16,10 @@ module.exports = {
       },
     ],
   },
-  plugins: [],
+  plugins: [
+    new ESLintPlugin({
+      failOnError: true,
+      overrideConfigFile: path.resolve(__dirname, '.eslintrc.js'),
+    }),
+  ],
 }
