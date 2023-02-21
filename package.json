@@ -77,7 +77,8 @@
   "overrides": {
     "glob-parent": "^6.0.2",
     "semver-regex": "4.0.5",
-    "got": "12.5.2"
+    "got": "12.5.2",
+    "json5": "^1.0.2"
   },
   "engines": {
     "node": ">=14.0.0"
