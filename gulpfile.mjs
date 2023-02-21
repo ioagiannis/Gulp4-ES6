@@ -1,5 +1,5 @@
 import gulp from 'gulp'
-const { series, parallel, src, dest, task, watch } = gulp
+const { series, parallel, src, dest, watch } = gulp
 import clean from 'gulp-clean'
 import sourcemaps from 'gulp-sourcemaps'
 import dartSass from 'sass'
@@ -14,7 +14,7 @@ import postcss from 'gulp-postcss'
 import cssnano from 'cssnano'
 import autoprefixer from 'autoprefixer'
 import stringReplace from 'gulp-string-replace'
-import imagemin from 'gulp-imagemin'
+// import imagemin from 'gulp-imagemin'
 // webpack
 import webpack from 'webpack-stream'
 import webpackConfig from './webpack.config.js'
@@ -88,14 +88,14 @@ const clear = () =>
 
 const imagesDev = () => src('./src/imgs/**/**').pipe(dest('./public/imgs'))
 
-export const imagesBuild = () =>
-  src('./src/imgs/**/**')
-    .pipe(
-      imagemin({
-        verbose: true,
-      })
-    )
-    .pipe(dest('./public/imgs'))
+// const imagesBuild = () =>
+//   src('./src/imgs/**/**')
+//     .pipe(
+//       imagemin({
+//         verbose: true,
+//       })
+//     )
+//     .pipe(dest('./public/imgs'))
 
 const fonts = () => src('./src/fonts/**/**').pipe(dest('./public/fonts'))
 
@@ -125,7 +125,7 @@ const stylesBuild = () =>
 const scriptsVendors = () =>
   src('./src/js/vendors/*.js').pipe(dest('./public/js/vendors'))
 
-const scriptsDev = () => {
+export const scriptsDev = () => {
   webpackMainConfig.mode = 'development'
   webpackMainConfig.watch = true
 
@@ -134,7 +134,7 @@ const scriptsDev = () => {
     .pipe(dest('./public/js'))
 }
 
-const scriptsBuild = () => {
+export const scriptsBuild = () => {
   webpackConfig.mode = 'production'
 
   return src('./src/js/main.js')
@@ -143,7 +143,7 @@ const scriptsBuild = () => {
     .pipe(dest('./public/js'))
 }
 
-const scriptsVueDev = () => {
+export const scriptsVueDev = () => {
   webpackConfig.mode = 'development'
   webpackConfig.watch = true
 
@@ -152,7 +152,7 @@ const scriptsVueDev = () => {
     .pipe(dest('./public/js'))
 }
 
-const scriptsVueBuild = () => {
+export const scriptsVueBuild = () => {
   webpackConfig.mode = 'production'
 
   return src('./src/js/vue/index.js')
@@ -167,7 +167,7 @@ const mockServer = () =>
 // BrowserSync
 export const serve = (cb) => {
   browserSync.init({
-    codeSync: true,
+    codeSync: false,
     server: {
       baseDir: './public',
       directory: true,
@@ -217,11 +217,22 @@ export const build = series(
     scriptsBuild,
     scriptsVueBuild,
     stylesBuild,
-    imagesBuild,
+    imagesDev,
     fonts,
     staticMedia,
     mockServer
   )
 )
 
-export default dev
+export const deploy = series(
+  clear,
+  parallel(
+    scriptsVendors,
+    scriptsBuild,
+    scriptsVueBuild,
+    stylesBuild,
+    imagesDev,
+    fonts
+  )
+)
+
